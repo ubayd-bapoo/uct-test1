@@ -40,14 +40,14 @@ source venv/bin/activate  # On Windows, use 'venv\Scripts\activate'
 pip install -r requirements.txt
 
 # Test the application
-python uct-test1/manage.py migrate  # Will create SqlLite DB with tables
-python uct-test1/manage.py runserver  # Will run the service
+python manage.py migrate  # Will create SqlLite DB with tables
+python manage.py runserver  # Will run the service
 ```
 
 ### 4. Running the Python Application Locally
 To run the application in your local Python environment, you can use the following command:
 ```bash
-python uct-test1/manage.py runserver  # Will run the service
+python manage.py runserver  # Will run the service
 ```
 
 ### 5. Building the Docker Image
@@ -70,7 +70,7 @@ docker run -p 8000:8000 uct-test1
 ### 7. Unit Test
 To run the unit tests for this application, follow these steps:
 ```bash
-   python uct-test1/manage.py test
+   python manage.py test
 ```
 #### Automated Testing with GitHub Actions
 
