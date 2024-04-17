@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'header.html' %}
+<div class="container-fluid">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ object.name }}</h5>
+          <p class="card-text">
+              <span style="font-size:5em;">
+                  <i class="fa fa-file-video-o" aria-hidden="true"></i>
+              </span>
+          </p>
+        <p>Year: {{ object.year_released }}</p>
+      </div>
+    </div>
+</div>
+{% include 'footer.html' %}
+{% endblock %}

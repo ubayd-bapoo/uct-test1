@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+  <style>
+    .input-container {
+      position: relative;
+    }
+
+    .password-toggle {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+  </style>
+{% include 'static.html' %}
+  <body>
+    <div class="login-page">
+      <div class="container d-flex align-items-center position-relative py-5">
+        <div class="card shadow-sm w-100 rounded overflow-hidden bg-none">
+          <div class="card-body p-0">
+            <div class="row gx-0 align-items-stretch">
+              <!-- Logo & Information Panel-->
+              <div class="col-lg-6">
+                <div class="info d-flex justify-content-center flex-column p-4 h-100">
+                  <div class="py-5">
+                    <h1 class="display-6 fw-bold">UCT Test 1</h1>
+                    <p class="fw-light mb-0">Ubayd Bapoo</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Form Panel    -->
+              <div class="col-lg-6 bg-white">
+                <div class="d-flex align-items-center px-4 px-lg-5 h-100">
+                  <form class="login-form py-5 w-100" method="post">
+                    {% csrf_token %}
+                    {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} " role="alert">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% if form.errors %}
+                      {% for error in form.non_field_errors %}
+                        <div class="alert alert-warning" role="alert">
+                          {{ error }}
+                        </div>
+                      {% endfor %}
+                    {% endif %}
+                    <div class="input-material-group mb-3">
+                      <input class="input-material" id="{{ form.username.id_for_label }}" type="text" name="{{ form.username.name }}" {% if form.username.value %}value="{{ form.username.value }}"{% endif %} autocomplete="off" data-validate-field="loginUsername">
+                      <label class="label-material" for="{{ form.username.id_for_label }}">Username</label>
+                    </div>
+                    <div class="input-material-group mb-4">
+                      <input class="input-material" id="{{ form.password.id_for_label }}" type="password" name="{{ form.password.name }}" {% if form.password.value %}value="{{ form.password.value }}"{% endif %} required data-validate-field="loginPassword">
+                      <i id="toggleButton" class="password-toggle fas fa-eye-slash"></i>
+                      <label class="label-material" for="{{ form.password.id_for_label }}">Password</label>
+                    </div>
+                    <button class="btn btn-primary mb-3" type="submit">Login</button>
+
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+</body>
+<!-- JavaScript -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var passwordInput = document.getElementById("{{ form.password.id_for_label }}");
+    var toggleButton = document.getElementById("toggleButton");
+
+    toggleButton.addEventListener("click", function() {
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.classList.remove("fa-eye-slash");
+            toggleButton.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            toggleButton.classList.remove("fa-eye");
+            toggleButton.classList.add("fa-eye-slash");
+        }
+    });
+  });
+</script>
+{% endblock %}
